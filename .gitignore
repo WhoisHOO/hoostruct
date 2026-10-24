@@ -1,0 +1,30 @@
+# media / large data - never commit
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.ts
+*.h264
+*.h265
+*.webm
+*.wav
+*.mp3
+data/
+samples/
+output/
+
+# python
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.env
+
+# os / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

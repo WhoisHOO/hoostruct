@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hoostruct"
+version = "0.1.0"
+description = "Turn unstructured data into structured, verifiable records. Video first."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Younghoo Cho" }]
+requires-python = ">=3.10"
+dependencies = []
+keywords = ["video", "structured-data", "data-extraction", "vlm", "integrity"]
+
+[project.optional-dependencies]
+cv = ["opencv-python>=4.8"]
+
+[project.urls]
+Repository = "https://github.com/WhoisHOO/hoostruct"
+
+[project.scripts]
+hoostruct = "hoostruct.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["hoostruct*"]
