@@ -67,6 +67,7 @@ class VlmExtractor(Extractor):
         jpeg_quality: int = 80,
         timeout_s: float = 300.0,
         prompt: str | None = None,
+        max_side: int = 896,
     ):
         self.model = model
         self.version = model  # engine_version records which model produced each record
@@ -75,6 +76,7 @@ class VlmExtractor(Extractor):
         self.jpeg_quality = jpeg_quality
         self.timeout_s = timeout_s
         self.prompt = prompt or DEFAULT_PROMPT
+        self.max_side = max_side  # frames larger than this are downscaled before sending
 
     def extract(self, source: SourceMeta, windows: Iterable[Window]) -> Iterator[Record]:
         cv2 = require_cv2()
@@ -113,6 +115,10 @@ class VlmExtractor(Extractor):
             ok, frame = cap.read()
             if not ok:
                 continue
+            h, w = frame.shape[:2]
+            if max(h, w) > self.max_side:
+                scale = self.max_side / max(h, w)
+                frame = cv2.resize(frame, (int(w * scale), int(h * scale)))
             ok, buf = cv2.imencode(".jpg", frame, [int(cv2.IMWRITE_JPEG_QUALITY), self.jpeg_quality])
             if ok:
                 images.append(base64.b64encode(buf.tobytes()).decode("ascii"))
