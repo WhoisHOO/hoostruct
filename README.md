@@ -1,5 +1,7 @@
 # HooStruct
 
+**English** | [한국어](README.ko.md)
+
 Turn unstructured data into structured, verifiable records. Video is the first supported source.
 
 ## Why
