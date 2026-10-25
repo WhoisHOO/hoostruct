@@ -38,7 +38,7 @@ source (video) ─> sampling ─> extraction engine(s) ─> records (JSONL) + ma
 ## Quickstart
 
 ```bash
-pip install hoostruct[cv]        # or: pip install opencv-python
+pip install "hoostruct[cv] @ git+https://github.com/WhoisHOO/hoostruct"
 ollama pull gemma4:12b           # any Ollama vision model works
 
 hoostruct refine footage.mp4 --out data/records

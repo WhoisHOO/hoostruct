@@ -35,7 +35,7 @@
 ## 빠른 시작
 
 ```bash
-pip install hoostruct[cv]        # 또는: pip install opencv-python
+pip install "hoostruct[cv] @ git+https://github.com/WhoisHOO/hoostruct"
 ollama pull gemma4:12b           # 비전을 지원하는 Ollama 모델이면 무엇이든 가능
 
 hoostruct refine footage.mp4 --out data/records
