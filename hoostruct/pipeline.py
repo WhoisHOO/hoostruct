@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from . import integrity
-from .engines import get_engine
+from .engines import Extractor, get_engine
 from .ingest import ingest
 from .models import Manifest, utcnow
 from .retention import RetentionAction
@@ -16,13 +16,14 @@ def run(
     sink: RecordSink,
     engine_name: str = "mock",
     engine_kwargs: dict | None = None,
+    engine: Extractor | None = None,
     sampler: Sampler | None = None,
     retention: RetentionAction = RetentionAction.KEEP,
     device_id: str | None = None,
 ) -> Manifest:
     started = utcnow()
     source = ingest(source_path, device_id=device_id)
-    engine = get_engine(engine_name, **(engine_kwargs or {}))
+    engine = engine or get_engine(engine_name, **(engine_kwargs or {}))
     sampler = sampler or FixedIntervalSampler()
 
     sink.open(source.source_id)
